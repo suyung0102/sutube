@@ -1,38 +1,21 @@
-export const videos = [
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+
+mongoose.connect(
+    process.env.MONGO_URL,
     {
-        id: 333555,
-        title: 'Video awesome',
-        description: 'This is something I love',
-        views: 24,
-        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creator: {
-            id: 12356,
-            name: "Nicolas",
-            email: "suyung@nam.com"
-        }
-    },
-    {
-        id: 123852,
-        title: 'Video wow',
-        description: 'This is something I love',
-        views: 24,
-        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creator: {
-            id: 12356,
-            name: "Nicolas",
-            email: "suyung@nam.com"
-        }
-    },
-    {
-        id: 741852,
-        title: 'Video hello',
-        description: 'This is something I love',
-        views: 24,
-        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creator: {
-            id: 12356,
-            name: "Nicolas",
-            email: "suyung@nam.com"
-        }
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true
     }
-];
+);
+
+const db= mongoose.connection;
+
+// 한번만 실행, once
+const handleOpen = () =>console.log("Connected to DB");
+const handleError = (error) =>console.log(`ERROR to DB:${error}`);
+
+db.once("open", handleOpen);
+db.on("error", handleError);
