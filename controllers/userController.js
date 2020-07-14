@@ -41,6 +41,7 @@ export const postLogin = passport.authenticate("local", {
 export const githubLogin = passport.authenticate("github");
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
+  console.log(profile);
   const {
     _json: { id, avatar_url: avatarUrl, name, email },
   } = profile;
