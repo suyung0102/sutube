@@ -9,7 +9,7 @@ block content
         .video__info
             if loggedUser && video.creator.id === loggedUser.id
                 a(href=routes.editVideo(video.id))
-                    button Edit video
+                    button.edit__video Edit video
             h5.video__title=video.title
             p.video__description=video.description
             if video.views === 1
@@ -31,6 +31,8 @@ block content
             form.add__comment#jsAddComment
                 input(type="text", placeholder="Add a comment")
             ul.video__comments-list#jsCommentList
-                each comment in video.comments.reverse()
+                each comment, index in video.comments.reverse()
                     li
                         span=comment.text
+                            if loggedUser && comment.creator.toString() === loggedUser.id
+                                button(class="remove__comment", value=`${comment.id}`) X

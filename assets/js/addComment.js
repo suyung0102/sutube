@@ -11,6 +11,7 @@ const increaseNumber = () => {
 const addComment = (comment) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
+  const button = '<button class="fas fa-pause"></i>';
   span.innerHTML = comment;
   li.appendChild(span);
   commentList.prepend(li);
