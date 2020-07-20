@@ -12,6 +12,7 @@ import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import apiRouter from "./routers/apiRouter";
 import "./passport";
 
 const app = express();
@@ -25,8 +26,6 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-// 세션값 핸들링
-// secret : sessionId 암호화
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
@@ -37,14 +36,13 @@ app.use(
     }),
   })
 );
-// 세션 초기화
 app.use(passport.initialize());
-// 세션 저장
 app.use(passport.session());
 app.use(localsMiddleware);
 
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
 
 export default app;
