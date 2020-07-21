@@ -1,4 +1,5 @@
 import express from "express";
+// const express = require('express');
 import routes from "../routes";
 import {
   videoDetail,
@@ -14,6 +15,7 @@ const videoRouter = express.Router();
 
 // Upload
 videoRouter.get(routes.upload, getUpload);
+// 라우터 하나에 여러개의 미들웨어를 넣을 수 있음
 videoRouter.post(routes.upload, uploadVideo, postUpload);
 
 // Detail
@@ -27,3 +29,4 @@ videoRouter.post(routes.editVideo(), postEditVideo);
 videoRouter.get(routes.deleteVideo(), deleteVideo);
 
 export default videoRouter;
+// module.exports = router;
